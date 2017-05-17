@@ -38,6 +38,7 @@ pipeline
         echo 'Running Web Application Scanner.....'
         sleep 5
       }
+    }
       //**********************************************
       stage('Task Complete')
       {
