@@ -26,7 +26,7 @@ pipeline
     }
     
     //**********************************************
-    stage('Development Automated testing')
+    /*stage('Development Automated testing')
     {
       steps
       {
@@ -41,7 +41,29 @@ pipeline
           },
        
       }
+    }*/
+    
+     stage('Post-Deployment Tests - DEV')
+    {
+      steps
+      {
+        parallel(
+          'API/Functional*':
+          {
+            echo 'API/Functional testing...'
+          },
+          'Security: Endpoint Scanning*':
+          {
+            echo 'Security: Endpoint Scanning...'
+          },
+          'Integration':
+          {
+            echo 'Integration Testing...'
+          }
+        )
+      }
     }
+
     
      //****************************************
     stage('Clean Development Environment')
@@ -63,7 +85,7 @@ pipeline
       }
     }
    //**********************************************
-    stage('Automated Security Testing')
+   /* stage('Automated Security Testing')
     {
       steps
       {
@@ -85,7 +107,7 @@ pipeline
           }
         
       }
-    }
+    }*/
       //**********************************************
       stage('Task Complete')
       {
