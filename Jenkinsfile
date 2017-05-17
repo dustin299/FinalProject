@@ -1,60 +1,46 @@
-#!groovy
+!groovy
 
 pipeline
-{ 
-  //specifies jenkins execution env, executor and checks out a repository
-  agent any 
-  }
- //list of stages specifying in which stage the pipeline steps will be executed.
- stages 
- {
-  
- //*********************************
-  stages('Initialization')
+{
+  agent any //specifies jenkins execution environment, executor and checks out a repository
+
+  options
   {
-    steps
-    {
-      echo 'Task Initialization...'
-      sleep 5
-      }
+    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10'))
   }
-  //********************************
-  stages('Build')
+
+  tools
   {
-    steps
+    maven 'Maven 3.3.9'
+    jdk 'jdk8'
+  #!groovy
+
+pipeline
+{
+  agent any //specifies jenkins execution environment, executor and checks out a repository
+
+  options
+  {
+    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10'))
+  }
+
+  tools
+  {
+    maven 'Maven 3.3.9'
+    jdk 'jdk8'
+  }
+
+  stages //list of stages specifying in which stage the pipeline steps will be executed
+  {
+
+//****************************************
+    stage('Initialization')
     {
-      echo 'Starting Build Process....'
-      sleep 5
+      steps
+      {
+        sh '''
+          echo "PATH = ${PATH}"
+          echo "M2_HOME = ${M2_HOME}"
+        '''
       }
-  }  
-   //*************************************
-   //Skipping other process and jumping to Security Testing for Demo
-   stages('Automated Security Testing')
-   {
-    steps
-    {
-      echo 'Starting Code Scanning using SonarQube....'
-      sleep 5
-      }
-   }  
-    steps
-    {
-      echo 'Starting Web Application Scanner using ....'
-      sleep 5
-      }
-      
-     steps
-     {
-     echo 'Starting Infrastructure Scanning using ...'
-     }
- }
-   //************************************
-   stages('Complete')
-   {
-    steps
-    {
-      echo 'Pipeline is complete...'
-      sleep 5
-      }
-   }
-}
+    }
