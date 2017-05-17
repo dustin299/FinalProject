@@ -31,12 +31,12 @@ pipeline
       steps
       {
         parallel(
-          'API Testing':
+          'API Testing*':
           {
             echo 'Unit Testing Completed...'
             sleep 7
           },
-          'SonarQube Analysis'
+          'SonarQube Analysis*'
           {
             echo 'Running SonarQube....'
             sleep 5
@@ -70,17 +70,17 @@ pipeline
       steps
       {
         parallel(
-          'SonarQube Sanning':
+          'SonarQube Sanning*':
           {
             echo 'SonarQube Completed...'
             sleep 7
           },
-          'Web Application Scanning'
+          'Web Application Scanning*'
           {
             echo 'Running Scanner....'
             sleep 5
           },
-          'Infrastructure Scanning':
+          'Infrastructure Scanning*':
           {
             echo 'Scanning Image using OpenVAS'
             sleep 10
