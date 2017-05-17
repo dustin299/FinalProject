@@ -30,18 +30,18 @@ pipeline
     {
       steps
       {
-      parallel(
-        'API Testing':
-        {
-        echo 'Unit Testing Completed...'
-        sleep 7
-        },
-        'SonarQube Analysis'
-        {
-        echo 'Running SonarQube....'
-        sleep 5
-        },
-      )
+        parallel(
+          'API Testing':
+          {
+            echo 'Unit Testing Completed...'
+            sleep 7
+          },
+          'SonarQube Analysis'
+          {
+            echo 'Running SonarQube....'
+            sleep 5
+          },
+        )
       }
     }
     
@@ -69,23 +69,23 @@ pipeline
     {
       steps
       {
-      parallel(
-        'SonarQube Sanning':
-        {
-          echo 'SonarQube Completed...'
-          sleep 7
-        },
-        'Web Application Scanning'
-        {
-          echo 'Running Scanner....'
-          sleep 5
-        },
-        'Infrastructure Scanning':
-        {
-          echo 'Scanning Image using OpenVAS'
-          sleep 10
-        }
-      )
+        parallel(
+          'SonarQube Sanning':
+          {
+            echo 'SonarQube Completed...'
+            sleep 7
+          },
+          'Web Application Scanning'
+          {
+            echo 'Running Scanner....'
+            sleep 5
+          },
+          'Infrastructure Scanning':
+          {
+            echo 'Scanning Image using OpenVAS'
+            sleep 10
+          }
+        )
       }
     }
       //**********************************************
