@@ -33,6 +33,10 @@ pipeline
         echo 'Running SonarQube....'
         sleep 5
       }
+      
+    }
+    stage('Web Application Scanning')
+    {
       steps
       {
         echo 'Running Web Application Scanner.....'
