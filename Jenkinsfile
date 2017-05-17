@@ -21,7 +21,7 @@ pipeline
       steps
       {
         echo 'Building Image...'
-        sleep 5
+        sleep 10
       }
     }
     
@@ -34,15 +34,18 @@ pipeline
           'Code Coverage*':
           {
             echo 'Code Coverage...'
+            sleep 5
           },
           'API Testing*':
           {
             echo 'API Testing Complete...'
+            sleep 3
           },
           'SonarQube Analysis':
           {
-            sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/Default/bin/sonar-scanner -Dsonar.host.url=http://127.0.0.1:9000  -Dsonar.login=c46b4dba7d1099ef4486b9c942dc45a61113286f    -Dsonar.projectName=Spring-Pipeline -Dsonar.projectVersion=1.0 -Dsonar.projectKey=Sonar:spring-pipeline -Dsonar.sources=."
+            //sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/Default/bin/sonar-scanner -Dsonar.host.url=http://127.0.0.1:9000  -Dsonar.login=c46b4dba7d1099ef4486b9c942dc45a61113286f    -Dsonar.projectName=Spring-Pipeline -Dsonar.projectVersion=1.0 -Dsonar.projectKey=Sonar:spring-pipeline -Dsonar.sources=."
             echo 'Code Scanning Complete...'
+            sleep 5
           }
         )
       }
@@ -89,7 +92,7 @@ pipeline
           },
           'SonarQube Analysis':
           {
-            sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/Default/bin/sonar-scanner -Dsonar.host.url=http://127.0.0.1:9000  -Dsonar.login=c46b4dba7d1099ef4486b9c942dc45a61113286f    -Dsonar.projectName=Spring-Pipeline -Dsonar.projectVersion=1.0 -Dsonar.projectKey=Sonar:spring-pipeline -Dsonar.sources=."
+            //sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/Default/bin/sonar-scanner -Dsonar.host.url=http://127.0.0.1:9000  -Dsonar.login=c46b4dba7d1099ef4486b9c942dc45a61113286f    -Dsonar.projectName=Spring-Pipeline -Dsonar.projectVersion=1.0 -Dsonar.projectKey=Sonar:spring-pipeline -Dsonar.sources=."
             echo 'Code Scanning Complete...'
             sleep 5
           }
