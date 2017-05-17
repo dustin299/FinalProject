@@ -31,11 +31,11 @@ pipeline
       steps
       {
         parallel
-        'API Testing*': {
+        'API Testing*' {
             echo 'Unit Testing Completed...'
             sleep 7
           },
-          'SonarQube Analysis*': {
+          'SonarQube Analysis*' {
             echo 'Running SonarQube....'
             sleep 5
           },
