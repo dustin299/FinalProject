@@ -25,40 +25,23 @@ pipeline
       }
     }
     
-    //**********************************************
-    /*stage('Development Automated testing')
-    {
-      steps
-      {
-        parallel
-        'API Testing*' {
-            echo 'Unit Testing Completed...'
-            sleep 7
-          },
-          'SonarQube Analysis*' {
-            echo 'Running SonarQube....'
-            sleep 5
-          },
-       
-      }
-    }*/
-    
-     stage('Post-Deployment Tests - DEV')
+    //********************************************
+     stage('Automated Scanning - DEV')
     {
       steps
       {
         parallel(
-          'API/Functional*':
+          'Code Coverage*':
           {
-            echo 'API/Functional testing...'
+            echo 'Code Coverage...'
           },
-          'Security: Endpoint Scanning*':
+          'API Testing*':
           {
-            echo 'Security: Endpoint Scanning...'
+            echo 'API Testing Complete...'
           },
-          'Integration':
+          'SonarQube Analysis':
           {
-            echo 'Integration Testing...'
+            echo 'Code Scanning Complete...'
           }
         )
       }
@@ -85,29 +68,29 @@ pipeline
       }
     }
    //**********************************************
-   /* stage('Automated Security Testing')
+     stage('Automated Security Testing - Test')
     {
       steps
       {
-        parallel
-          'SonarQube Sanning*':
-          {
-            echo 'SonarQube Completed...'
-            sleep 7
-          },
-          'Web Application Scanning*'
-          {
-            echo 'Running Scanner....'
-            sleep 5
-          },
+        parallel(
           'Infrastructure Scanning*':
           {
-            echo 'Scanning Image using OpenVAS'
+            echo 'OpenVas Scanning...'
             sleep 10
+          },
+          'Web Application Scanning*':
+          {
+            echo 'Scanning Complete...'
+            sleep 7
+          },
+          'SonarQube Analysis':
+          {
+            echo 'Code Scanning Complete...'
+            sleep 5
           }
-        
+        )
       }
-    }*/
+    }
       //**********************************************
       stage('Task Complete')
       {
