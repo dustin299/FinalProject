@@ -26,21 +26,66 @@ pipeline
     }
     
     //**********************************************
-    stage('Automated Security testing')
+    stage('Development Automated testing')
     {
       steps
       {
+      parallel(
+        'API Testing':
+        {
+        echo 'Unit Testing Completed...'
+        sleep 7
+        },
+        'SonarQube Analysis'
+        {
         echo 'Running SonarQube....'
         sleep 5
+        },
+      )
       }
-      
     }
-    stage('Web Application Scanning')
+    
+     //****************************************
+    stage('Clean Development Environment')
     {
       steps
       {
-        echo 'Running Web Application Scanner.....'
+        echo 'Completed...'
         sleep 5
+      }
+    }
+    
+   //****************************************
+    stage('Deploy to Test Environment')
+    {
+      steps
+      {
+        echo 'Deployed Image...'
+        sleep 5
+      }
+    }
+   //**********************************************
+    stage('Automated Security Testing')
+    {
+      steps
+      {
+      parallel(
+        'SonarQube Sanning':
+        {
+          echo 'SonarQube Completed...'
+          sleep 7
+        },
+        'Web Application Scanning'
+        {
+          echo 'Running Scanner....'
+          sleep 5
+        },
+        'Infrastructure Scanning':
+        {
+          echo 'Scanning Image using OpenVAS'
+          sleep 10
+        }
+      )
       }
     }
       //**********************************************
