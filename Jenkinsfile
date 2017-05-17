@@ -41,6 +41,8 @@ pipeline
           },
           'SonarQube Analysis':
           {
+           //sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/Default/bin/sonar-scanner -Dsonar.host.url=http://127.0.0.1:9000  -Dsonar.login=API_Key    -Dsonar.projectName=Spring-Pipeline -Dsonar.projectVersion=1.0 -Dsonar.projectKey=Sonar:spring-pipeline -Dsonar.sources=."
+            
             echo 'Code Scanning Complete...'
           }
         )
@@ -75,16 +77,20 @@ pipeline
         parallel(
           'Infrastructure Scanning*':
           {
+            //Use OpenVAS to conduct Image Scanning #Still working on this. 
             echo 'OpenVas Scanning...'
             sleep 10
           },
           'Web Application Scanning*':
           {
+            //executes Arachni to do a full scan 
+            //sh /opt/arachni/bin/arachni Target_address --check=* 
             echo 'Scanning Complete...'
             sleep 7
           },
           'SonarQube Analysis':
           {
+            //sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/Default/bin/sonar-scanner -Dsonar.host.url=http://127.0.0.1:9000  -Dsonar.login=API_Key    -Dsonar.projectName=Spring-Pipeline -Dsonar.projectVersion=1.0 -Dsonar.projectKey=Sonar:spring-pipeline -Dsonar.sources=."
             echo 'Code Scanning Complete...'
             sleep 5
           }
